@@ -7,7 +7,7 @@ import com.jaysydney.Custom.ModItems;
 
 import net.fabricmc.api.ModInitializer;
 
-public class HerobrineComedyMod implements ModInitializer {
+public class ExampleMod implements ModInitializer {
 	public static final String MOD_ID = "herobrinecomedymod";
 
 	// This logger is used to write text to the console and the log file.

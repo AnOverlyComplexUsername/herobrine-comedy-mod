@@ -2,7 +2,7 @@ package com.jaysydney.Custom;
 
 import java.util.function.Function;
 
-import com.jaysydney.HerobrineComedyMod;
+import com.jaysydney.ExampleMod;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.Item;
@@ -18,7 +18,7 @@ public class ModItems {
 
     public static Item register(String name, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
         // Create the item key.
-        RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, Identifier.of(HerobrineComedyMod.MOD_ID, name));
+        RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, Identifier.of(ExampleMod.MOD_ID, name));
 
         // Create the item instance.
         Item item = itemFactory.apply(settings.registryKey(itemKey));
