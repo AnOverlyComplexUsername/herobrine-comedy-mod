@@ -1,14 +1,14 @@
 package com.jaysydney;
 
-import net.fabricmc.api.ModInitializer;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.jaysydney.Custom.ModItems;
 
-public class ExampleMod implements ModInitializer {
-	public static final String MOD_ID = "modid";
+import net.fabricmc.api.ModInitializer;
+
+public class HerobrineComedyMod implements ModInitializer {
+	public static final String MOD_ID = "herobrinecomedymod";
 
 	// This logger is used to write text to the console and the log file.
 	// It is considered best practice to use your mod id as the logger's name.
