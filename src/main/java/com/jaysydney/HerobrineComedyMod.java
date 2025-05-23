@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import com.jaysydney.Custom.ModItems;
 import com.jaysydney.Custom.ModSounds;
+import com.jaysydney.Custom.ModItemGroups;
 
 import net.fabricmc.api.ModInitializer;
 
@@ -21,6 +22,7 @@ public class HerobrineComedyMod implements ModInitializer {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
+		ModItemGroups.intialize();
 		ModSounds.initialize();
 		ModItems.initialize();
 		LOGGER.info("Hello Fabric world!");
