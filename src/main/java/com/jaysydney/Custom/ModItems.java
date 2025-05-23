@@ -1,8 +1,8 @@
-package com.example.Custom;
+package com.jaysydney.Custom;
 
 import java.util.function.Function;
 
-import com.example.ExampleMod;
+import com.jaysydney.ExampleMod;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.Item;

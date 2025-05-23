@@ -1,11 +1,11 @@
-package com.example;
+package com.jaysydney;
 
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.example.Custom.ModItems;
+import com.jaysydney.Custom.ModItems;
 
 public class ExampleMod implements ModInitializer {
 	public static final String MOD_ID = "modid";
