@@ -19,7 +19,7 @@ public class ModBlocks {
     public static final Block NETHER_REACTOR_CORE = register(
             "nether_reactor_core",
             Block::new,
-            AbstractBlock.Settings.create().
+            AbstractBlock.Settings.create().hardness(3f).resistance(6f).
                     sounds(ModSounds.SOUND_BLOCk_SOUNDS),
             true
     );

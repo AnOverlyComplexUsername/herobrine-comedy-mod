@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "iDi",
+        "iDi",
+        "iDi"
+    ],
+    "key": {
+        "i": "minecraft:iron_ingot",
+        "D": "minecraft:diamond"
+    },
+    "result": {
+        "id": "herobrinecomedymod:a",
+        "count": 1
+    }
+}
