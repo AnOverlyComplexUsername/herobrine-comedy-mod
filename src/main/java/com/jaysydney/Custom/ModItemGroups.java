@@ -20,7 +20,7 @@ public class ModItemGroups {
             .displayName(Text.translatable("itemGroup.herobrinecomedymod"))
             .build();
 
-    public static void intialize() {
+    public static void initialize() {
         Registry.register(Registries.ITEM_GROUP, MOD_ITEMS_GROUP_KEY, CUSTOM_ITEM_GROUP);
         ItemGroupEvents.modifyEntriesEvent(MOD_ITEMS_GROUP_KEY).register(itemGroup -> {
             itemGroup.add(ModItems.SUSPICIOUS_SUBSTANCE);

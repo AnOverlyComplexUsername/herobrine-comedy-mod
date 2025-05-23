@@ -1,6 +1,7 @@
 package com.jaysydney.Custom;
 
 import com.jaysydney.HerobrineComedyMod;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvent;
 
 import net.minecraft.registry.Registries;
@@ -9,9 +10,9 @@ import net.minecraft.util.Identifier;
 
 public class ModSounds {
 
-    public static final SoundEvent EVIL_AHHHH = registerSound("evil_ahhhh");
+    public static final SoundEvent EVIL_SCREAM = registerSound("evil_scream");
 
-    // public static final Block
+     public static final BlockSoundGroup SOUND_BLOCk_SOUNDS = new BlockSoundGroup(1f,1f ,ModSounds.EVIL_SCREAM,ModSounds.EVIL_SCREAM,ModSounds.EVIL_SCREAM,ModSounds.EVIL_SCREAM,ModSounds.EVIL_SCREAM);
 
     private static SoundEvent registerSound(String id) {
         Identifier identifier = Identifier.of(HerobrineComedyMod.MOD_ID, id);

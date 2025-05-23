@@ -22,7 +22,7 @@ import net.minecraft.util.Identifier;
 public class ModItems {
     public static final ConsumableComponent BLIND_FOOD_CONSUMABLE_COMPONENT = ConsumableComponents.food()
             // The duration is in ticks, 20 ticks = 1 second
-            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.DARKNESS, 3000 * 20, 3), 1.0f))
+            .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 300 * 20, 3), 1.0f))
             .build();
 
     public static final Item SUSPICIOUS_SUBSTANCE = register("suspicious_substance", Item::new,

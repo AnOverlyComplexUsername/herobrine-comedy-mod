@@ -1,5 +1,8 @@
 {
   "item.herobrinecomedymod.suspicious_substance": "Suspicious Substance",
-  "item.herobrimecomedymod.evil_ahhhh": "Fumo munching",
+  "sounds.herobrinecomedymod.evil_scream": "Fumo munching",
+  "block.herobrinecomedymod.nether_reactor_core": "Nether Reactor Core",
+  "item.herobrinecomedymod.nether_reactor_core": "Nether Reactor Core",
+
   "itemGroup.herobrinecomedymod": "Moddin it and by it"
 }
