@@ -1,7 +1,20 @@
 {
-  "variants": {
-    "": {
-      "model": "herobrinecomedymod:block/nether_reactor_core"
+  "multipart": [
+    {
+      "apply": {
+        "model": "herobrinecomedymod:block/nether_reactor_core_on"
+      },
+      "when": {
+        "activated": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "herobrinecomedymod:block/nether_reactor_core"
+      },
+      "when": {
+        "activated": "false"
+      }
     }
-  }
+  ]
 }
