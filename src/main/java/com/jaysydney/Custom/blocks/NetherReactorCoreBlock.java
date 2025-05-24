@@ -15,6 +15,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
+
 public class NetherReactorCoreBlock extends BlockWithEntity {
     public static final BooleanProperty ACTIVATED = BooleanProperty.of("activated");
 
@@ -52,7 +54,7 @@ public class NetherReactorCoreBlock extends BlockWithEntity {
     }
 
     private boolean checkAroundBlock(World world, BlockPos pos) {
-        // checks north, south, east, north for air also for top corners 
+        // checks north, south, east, north for air also for top corners
         return world.isAir(pos.east()) && world.isAir(pos.west())
             && world.isAir(pos.north()) && world.isAir(pos.south())
             && world.isAir(newPos(1,1,1, pos)) && world.isAir(newPos(1,1,-1, pos ))
@@ -79,7 +81,6 @@ public class NetherReactorCoreBlock extends BlockWithEntity {
             newPos(-1,0,1, pos),
             newPos(-1,0,-1, pos)
         };
-
         for (BlockPos i : goldPos)
         {
             if (!world.getBlockState(i).getBlock().equals(Blocks.GOLD_BLOCK)) return false;
