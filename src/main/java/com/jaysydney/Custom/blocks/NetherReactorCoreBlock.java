@@ -41,8 +41,9 @@ public class NetherReactorCoreBlock extends BlockWithEntity {
         if(!activated && checkAroundBlock(world,pos) && checkStructurePresent(world,pos) )
         {
             // Flip the value of activated and save the new blockstate.
-            world.setBlockState(pos, state.with(ACTIVATED, !activated));
+            world.setBlockState(pos, state.with(ACTIVATED, Boolean.FALSE));
             //TODO: ADD EVENT WHEN TRIGGERED SUCCESSFULLY
+            // EVENT SHOULD TURN ALL BLOCKS INTO OBSIDIAN AND SPAWN HEROBRINE (ALSO MAYBE ADD LIGHTNING)
             world.playSound(player, pos, SoundEvents.BLOCK_COMPARATOR_CLICK, SoundCategory.BLOCKS, 1.0F, 1.0F);
             return ActionResult.SUCCESS;
         }
@@ -60,7 +61,7 @@ public class NetherReactorCoreBlock extends BlockWithEntity {
                 newPos(1,-1,-1, pos ),
                 newPos(-1,-1,1, pos),
                 newPos(-1,-1,-1, pos),};
-        BlockPos[] cobblePos = { //checks if gold and cobble are placed properly 
+        BlockPos[] cobblePos = { //checks if gold and cobble are placed properly
             pos.up(), pos.down(),
             newPos(0,-1,1,pos),
             newPos(0,-1,-1,pos),
