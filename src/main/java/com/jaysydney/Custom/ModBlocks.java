@@ -1,4 +1,5 @@
 package com.jaysydney.Custom;
+import com.jaysydney.Custom.blocks.NetherReactorCoreBlock;
 import com.jaysydney.HerobrineComedyMod;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -16,9 +17,9 @@ import net.minecraft.util.Identifier;
 import java.util.function.Function;
 
 public class ModBlocks {
-    public static final Block NETHER_REACTOR_CORE = register(
+    public static final NetherReactorCoreBlock NETHER_REACTOR_CORE = (NetherReactorCoreBlock) register(
             "nether_reactor_core",
-            Block::new,
+            NetherReactorCoreBlock::new,
             AbstractBlock.Settings.create().hardness(3f).resistance(6f).
                     sounds(ModSounds.SOUND_BLOCk_SOUNDS),
             true
