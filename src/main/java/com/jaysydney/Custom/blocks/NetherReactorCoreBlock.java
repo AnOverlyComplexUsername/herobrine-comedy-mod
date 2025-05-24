@@ -2,10 +2,7 @@ package com.jaysydney.Custom.blocks;
 
 import com.jaysydney.Custom.enetities.NetherReactorCoreEntity;
 import com.mojang.serialization.MapCodec;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundCategory;
@@ -41,13 +38,57 @@ public class NetherReactorCoreBlock extends BlockWithEntity {
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit)
     {
         boolean activated = state.get(ACTIVATED);
+        if(!activated && checkAroundBlock(world,pos) && checkStructurePresent(world,pos) )
+        {
+            // Flip the value of activated and save the new blockstate.
+            world.setBlockState(pos, state.with(ACTIVATED, !activated));
+            //TODO: ADD EVENT WHEN TRIGGERED SUCCESSFULLY
+            world.playSound(player, pos, SoundEvents.BLOCK_COMPARATOR_CLICK, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            return ActionResult.SUCCESS;
+        }
 
-        // Flip the value of activated and save the new blockstate.
-        world.setBlockState(pos, state.with(ACTIVATED, !activated));
+        return ActionResult.PASS;
+    }
 
-        // Play a click sound to emphasise the interaction.
-        world.playSound(player, pos, SoundEvents.BLOCK_COMPARATOR_CLICK, SoundCategory.BLOCKS, 1.0F, 1.0F);
-        return ActionResult.SUCCESS;
+    private boolean checkAroundBlock(World world, BlockPos pos) {
+        // checks north, south, east, north for air
+        return world.isAir(pos.east()) && world.isAir(pos.west()) && world.isAir(pos.north()) && world.isAir(pos.south());
+    }
+
+    private boolean checkStructurePresent(World world, BlockPos pos) {
+        BlockPos[] goldPos = {newPos(1,-1,1, pos),
+                newPos(1,-1,-1, pos ),
+                newPos(-1,-1,1, pos),
+                newPos(-1,-1,-1, pos),};
+        BlockPos[] cobblePos = { //checks if gold and cobble are placed properly 
+            pos.up(), pos.down(),
+            newPos(0,-1,1,pos),
+            newPos(0,-1,-1,pos),
+            newPos(-1,-1,0,pos),
+            newPos(1,-1,0,pos),
+            newPos(0,1,1,pos),
+            newPos(0,1,-1,pos),
+            newPos(-1,1,0,pos),
+            newPos(1,1,0,pos),
+            newPos(1,0,1, pos),
+            newPos(1,0,-1, pos ),
+            newPos(-1,0,1, pos),
+            newPos(-1,0,-1, pos)
+        };
+        BlockPos adjacentPos = new BlockPos(pos.getX(), pos.getY()-1, pos.getZ());
+
+        for (BlockPos i : goldPos)
+        {
+            if (!world.getBlockState(i).getBlock().equals(Blocks.GOLD_BLOCK)) return false;
+        }
+        for (BlockPos i : cobblePos)
+        {
+            if (!world.getBlockState(i).getBlock().equals(Blocks.COBBLESTONE)) return false;
+        }
+        return true;
+    }
+    private BlockPos newPos(int x, int y, int z, BlockPos pos) {
+        return new BlockPos(pos.getX() + x,pos.getY() + y,pos.getZ() +  z);
     }
 
     public static int getLuminance(BlockState currentBlockState) {
