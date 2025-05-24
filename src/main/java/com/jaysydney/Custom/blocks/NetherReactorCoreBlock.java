@@ -41,7 +41,7 @@ public class NetherReactorCoreBlock extends BlockWithEntity {
         if(!activated && checkAroundBlock(world,pos) && checkStructurePresent(world,pos) )
         {
             // Flip the value of activated and save the new blockstate.
-            world.setBlockState(pos, state.with(ACTIVATED, Boolean.FALSE));
+            world.setBlockState(pos, state.with(ACTIVATED, Boolean.TRUE));
             //TODO: ADD EVENT WHEN TRIGGERED SUCCESSFULLY
             // EVENT SHOULD TURN ALL BLOCKS INTO OBSIDIAN AND SPAWN HEROBRINE (ALSO MAYBE ADD LIGHTNING)
             world.playSound(player, pos, SoundEvents.BLOCK_COMPARATOR_CLICK, SoundCategory.BLOCKS, 1.0F, 1.0F);
@@ -52,8 +52,11 @@ public class NetherReactorCoreBlock extends BlockWithEntity {
     }
 
     private boolean checkAroundBlock(World world, BlockPos pos) {
-        // checks north, south, east, north for air
-        return world.isAir(pos.east()) && world.isAir(pos.west()) && world.isAir(pos.north()) && world.isAir(pos.south());
+        // checks north, south, east, north for air also for top corners 
+        return world.isAir(pos.east()) && world.isAir(pos.west())
+            && world.isAir(pos.north()) && world.isAir(pos.south())
+            && world.isAir(newPos(1,1,1, pos)) && world.isAir(newPos(1,1,-1, pos ))
+        && world.isAir(newPos(-1,1,1, pos)) && world.isAir(newPos(-1,1,-1, pos));
     }
 
     private boolean checkStructurePresent(World world, BlockPos pos) {
@@ -76,7 +79,6 @@ public class NetherReactorCoreBlock extends BlockWithEntity {
             newPos(-1,0,1, pos),
             newPos(-1,0,-1, pos)
         };
-        BlockPos adjacentPos = new BlockPos(pos.getX(), pos.getY()-1, pos.getZ());
 
         for (BlockPos i : goldPos)
         {
@@ -85,6 +87,14 @@ public class NetherReactorCoreBlock extends BlockWithEntity {
         for (BlockPos i : cobblePos)
         {
             if (!world.getBlockState(i).getBlock().equals(Blocks.COBBLESTONE)) return false;
+        }
+        for (BlockPos i : goldPos)
+        {
+            world.setBlockState(i, Blocks.OBSIDIAN.getDefaultState());
+        }
+        for (BlockPos i : cobblePos)
+        {
+            world.setBlockState(i, Blocks.OBSIDIAN.getDefaultState());
         }
         return true;
     }
