@@ -4,6 +4,10 @@ import com.jaysydney.Custom.enetities.NetherReactorCoreEntity;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.boss.WitherEntity;
+import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -46,6 +50,9 @@ public class NetherReactorCoreBlock extends BlockWithEntity {
             world.setBlockState(pos, state.with(ACTIVATED, Boolean.TRUE));
             //TODO: ADD EVENT WHEN TRIGGERED SUCCESSFULLY
             // EVENT SHOULD TURN ALL BLOCKS INTO OBSIDIAN AND SPAWN HEROBRINE (ALSO MAYBE ADD LIGHTNING)
+            WitherEntity testEntity = new WitherEntity(EntityType.WITHER , world);
+            testEntity.setPosition(pos.getX() + 0.5 , pos.getY() + 6.5, pos.getZ() + 0.5);
+            world.spawnEntity(testEntity);
             world.playSound(player, pos, SoundEvents.BLOCK_COMPARATOR_CLICK, SoundCategory.BLOCKS, 1.0F, 1.0F);
             return ActionResult.SUCCESS;
         }
