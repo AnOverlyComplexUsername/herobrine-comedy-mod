@@ -51,7 +51,7 @@ public class NetherReactorCoreBlock extends BlockWithEntity {
             //TODO: ADD EVENT WHEN TRIGGERED SUCCESSFULLY
             // EVENT SHOULD TURN ALL BLOCKS INTO OBSIDIAN AND SPAWN HEROBRINE (ALSO MAYBE ADD LIGHTNING)
             WitherEntity testEntity = new WitherEntity(EntityType.WITHER , world);
-            testEntity.setPosition(pos.getX() + 0.5 , pos.getY() + 6.5, pos.getZ() + 0.5);
+            testEntity.setPosition(pos.getX() + 0.5 , pos.getY() + 4.5, pos.getZ() + 0.5);
             world.spawnEntity(testEntity);
             world.playSound(player, pos, SoundEvents.BLOCK_COMPARATOR_CLICK, SoundCategory.BLOCKS, 1.0F, 1.0F);
             return ActionResult.SUCCESS;
