@@ -8,10 +8,13 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.component.type.ConsumableComponents;
 import net.minecraft.component.type.FoodComponent;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.item.consume.ApplyEffectsConsumeEffect;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -27,6 +30,10 @@ public class ModItems {
 
     public static final Item SUSPICIOUS_SUBSTANCE = register("suspicious_substance", Item::new,
             new Item.Settings().food(new FoodComponent.Builder().nutrition(3).saturationModifier(5).build(), BLIND_FOOD_CONSUMABLE_COMPONENT));
+
+    public static final Item HEROBRINE_SPAWN_EGG = register("herobrine_spawn_egg",
+            (Properties) -> new SpawnEggItem(ModEntities.HEROBRINE, new Item.Settings()),
+            new Item.Settings());
 
 
     public static Item register(String name, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
