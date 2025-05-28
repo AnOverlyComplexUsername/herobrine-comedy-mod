@@ -1,8 +1,5 @@
 package com.jaysydney;
 
-import com.jaysydney.Custom.enetities.NetherReactorCoreEntity;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,6 +26,7 @@ public class HerobrineComedyMod implements ModInitializer {
 		ModItems.initialize();
 		ModBlocks.initialize();
 		ModBlockEntities.initialize();
+		ModEntities.initialize();
 
 		LOGGER.info("Hello Fabric world!");
 	}
