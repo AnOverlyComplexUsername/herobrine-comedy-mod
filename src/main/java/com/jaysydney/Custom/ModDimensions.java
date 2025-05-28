@@ -16,9 +16,9 @@ import java.util.OptionalLong;
 
 public class ModDimensions {
     public static final RegistryKey<DimensionOptions> HEROBRINEDIM = RegistryKey.of(RegistryKeys.DIMENSION,
-            Identifier.of(HerobrineComedyMod.MOD_ID, "herobrinedim"));
+            Identifier.of(HerobrineComedyMod.MOD_ID, "herobrinedimension"));
     public static final RegistryKey<World> HEROBRINE_WORLD = RegistryKey.of(RegistryKeys.WORLD,
-            Identifier.of(HerobrineComedyMod.MOD_ID, "herobrinedim"));
+            Identifier.of(HerobrineComedyMod.MOD_ID, "herobrinedimension"));
     public static final RegistryKey<DimensionType> HEROBRINEDIM_TYPE = RegistryKey.of(RegistryKeys.DIMENSION_TYPE,
             Identifier.of(HerobrineComedyMod.MOD_ID, "herobrinedim"));
 

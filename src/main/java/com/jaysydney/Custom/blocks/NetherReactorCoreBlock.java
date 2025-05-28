@@ -1,5 +1,6 @@
 package com.jaysydney.Custom.blocks;
 
+import com.jaysydney.Custom.ModDimensions;
 import com.jaysydney.Custom.enetities.NetherReactorCoreEntity;
 import com.mojang.serialization.MapCodec;
 import net.fabricmc.fabric.api.event.registry.FabricRegistry;
@@ -8,6 +9,10 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.network.packet.s2c.play.PositionFlag;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
@@ -15,6 +20,8 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -44,6 +51,25 @@ public class NetherReactorCoreBlock extends BlockWithEntity  {
         boolean activated = state.get(ACTIVATED);
         if(!activated && checkAroundBlock(world,pos) && checkStructurePresent(world,pos) )
         {
+            if (!world.isClient) 
+            {
+                MinecraftServer server = world.getServer();
+                if (server != null)
+                {
+                    ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
+                   ServerWorld herobrineWorld = server.getWorld(ModDimensions.HEROBRINE_WORLD);
+                    if(herobrineWorld != null)
+                    {
+                        TeleportTarget target =
+                                new TeleportTarget(herobrineWorld,
+                                new Vec3d(0.5f,0.5f,0.5f),
+                                new Vec3d(0,0,0),
+                                        serverPlayer.getYaw(),serverPlayer.getPitch(),
+                                        TeleportTarget.NO_OP);
+                        serverPlayer.teleportTo(target);
+                    }
+                }
+            }
             // Flip the value of activated and save the new blockstate.
             world.setBlockState(pos, state.with(ACTIVATED, Boolean.TRUE));
             //TODO: ADD EVENT WHEN TRIGGERED SUCCESSFULLY
@@ -51,7 +77,6 @@ public class NetherReactorCoreBlock extends BlockWithEntity  {
             WitherEntity testEntity = new WitherEntity(EntityType.WITHER , world);
             testEntity.setPosition(pos.getX() + 0.5 , pos.getY() + 4.5, pos.getZ() + 0.5);
             world.spawnEntity(testEntity);
-            player.teleport()
             world.playSound(player, pos, SoundEvents.BLOCK_COMPARATOR_CLICK, SoundCategory.BLOCKS, 1.0F, 1.0F);
             return ActionResult.SUCCESS;
         }
