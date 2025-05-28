@@ -21,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class ElivFumoBlock extends HorizontalFacingBlock {
     public static final MapCodec<ElivFumoBlock> CODEC = createCodec(ElivFumoBlock::new);
-    private static final VoxelShape SHAPE = Block.createCuboidShape(4.0D, 0.D, 4.5D, 12.0D, 8.5D, 14.0D);
+    private static final VoxelShape SHAPE = Block.createCuboidShape(4, 0, 4, 12, 9, 11);
     public ElivFumoBlock(Settings settings) {
         super(settings);
     }
