@@ -3,9 +3,7 @@ package com.jaysydney.Custom.enetities;
 import com.jaysydney.Custom.ModBlockEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 public class NetherReactorCoreEntity extends BlockEntity {
     public NetherReactorCoreEntity(BlockPos pos, BlockState state) {

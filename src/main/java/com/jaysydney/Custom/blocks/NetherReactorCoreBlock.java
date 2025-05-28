@@ -2,12 +2,11 @@ package com.jaysydney.Custom.blocks;
 
 import com.jaysydney.Custom.enetities.NetherReactorCoreEntity;
 import com.mojang.serialization.MapCodec;
+import net.fabricmc.fabric.api.event.registry.FabricRegistry;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.boss.WitherEntity;
-import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -19,9 +18,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 
-public class NetherReactorCoreBlock extends BlockWithEntity {
+public class NetherReactorCoreBlock extends BlockWithEntity  {
     public static final BooleanProperty ACTIVATED = BooleanProperty.of("activated");
 
     public NetherReactorCoreBlock(Settings settings) {
@@ -53,6 +51,7 @@ public class NetherReactorCoreBlock extends BlockWithEntity {
             WitherEntity testEntity = new WitherEntity(EntityType.WITHER , world);
             testEntity.setPosition(pos.getX() + 0.5 , pos.getY() + 4.5, pos.getZ() + 0.5);
             world.spawnEntity(testEntity);
+            player.teleport()
             world.playSound(player, pos, SoundEvents.BLOCK_COMPARATOR_CLICK, SoundCategory.BLOCKS, 1.0F, 1.0F);
             return ActionResult.SUCCESS;
         }
