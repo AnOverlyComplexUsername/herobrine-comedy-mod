@@ -75,7 +75,7 @@ public class NetherReactorCoreBlock extends BlockWithEntity  {
                                         TeleportTarget.NO_OP);
                         placer.loadStructure();
                         serverPlayer.teleportTo(target);
-                        WitherEntity testEntity = new WitherEntity(EntityType.WITHER , world);
+                        WitherEntity testEntity = new WitherEntity(EntityType.WITHER , herobrineWorld);
                         testEntity.setPosition(pos.getX() + 0.5 , pos.getY() + 4.5, pos.getZ() + 0.5);
                         world.spawnEntity(testEntity);
                     }
