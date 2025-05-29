@@ -2,14 +2,14 @@ package com.jaysydney.Custom.blocks;
 
 import com.jaysydney.Custom.ModDimensions;
 import com.jaysydney.Custom.enetities.NetherReactorCoreEntity;
+import com.jaysydney.HerobrineComedyMod;
 import com.mojang.serialization.MapCodec;
-import net.fabricmc.fabric.api.event.registry.FabricRegistry;
+import me.emafire003.dev.structureplacerapi.StructurePlacerAPI;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.packet.s2c.play.PositionFlag;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -18,13 +18,15 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.BlockRotation;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-
 
 public class NetherReactorCoreBlock extends BlockWithEntity  {
     public static final BooleanProperty ACTIVATED = BooleanProperty.of("activated");
@@ -58,14 +60,20 @@ public class NetherReactorCoreBlock extends BlockWithEntity  {
                 {
                     ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
                    ServerWorld herobrineWorld = server.getWorld(ModDimensions.HEROBRINE_WORLD);
+
                     if(herobrineWorld != null)
                     {
+                        StructurePlacerAPI placer = new StructurePlacerAPI(herobrineWorld,
+                                Identifier.of(HerobrineComedyMod.MOD_ID,"herobrine_stadium"),
+                                new BlockPos(0,0,0), BlockMirror.NONE, BlockRotation.NONE,
+                                true,1.0f, new BlockPos(-1,-1,-1));
                         TeleportTarget target =
                                 new TeleportTarget(herobrineWorld,
                                 new Vec3d(0.5f,0.5f,0.5f),
                                 new Vec3d(0,0,0),
                                         serverPlayer.getYaw(),serverPlayer.getPitch(),
                                         TeleportTarget.NO_OP);
+                        placer.loadAndRestoreStructureAnimated(200, 4, false);
                         serverPlayer.teleportTo(target);
                     }
                 }
