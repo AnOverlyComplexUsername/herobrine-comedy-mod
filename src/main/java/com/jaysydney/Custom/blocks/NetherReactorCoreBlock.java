@@ -65,16 +65,19 @@ public class NetherReactorCoreBlock extends BlockWithEntity  {
                     {
                         StructurePlacerAPI placer = new StructurePlacerAPI(herobrineWorld,
                                 Identifier.of(HerobrineComedyMod.MOD_ID,"herobrine_stadium"),
-                                new BlockPos(0,0,0), BlockMirror.NONE, BlockRotation.NONE,
-                                true,1.0f, new BlockPos(-1,-1,-1));
+                                new BlockPos(0,98,0), BlockMirror.NONE, BlockRotation.NONE,
+                                true,1.0f, new BlockPos(0,0,0));
                         TeleportTarget target =
                                 new TeleportTarget(herobrineWorld,
-                                new Vec3d(0.5f,0.5f,0.5f),
+                                new Vec3d(28f,100.5f,24.2f),
                                 new Vec3d(0,0,0),
                                         serverPlayer.getYaw(),serverPlayer.getPitch(),
                                         TeleportTarget.NO_OP);
-                        placer.loadAndRestoreStructureAnimated(200, 4, false);
+                        placer.loadStructure();
                         serverPlayer.teleportTo(target);
+                        WitherEntity testEntity = new WitherEntity(EntityType.WITHER , world);
+                        testEntity.setPosition(pos.getX() + 0.5 , pos.getY() + 4.5, pos.getZ() + 0.5);
+                        world.spawnEntity(testEntity);
                     }
                 }
             }
@@ -82,9 +85,7 @@ public class NetherReactorCoreBlock extends BlockWithEntity  {
             world.setBlockState(pos, state.with(ACTIVATED, Boolean.TRUE));
             //TODO: ADD EVENT WHEN TRIGGERED SUCCESSFULLY
             // EVENT SHOULD TURN ALL BLOCKS INTO OBSIDIAN AND SPAWN HEROBRINE (ALSO MAYBE ADD LIGHTNING)
-            WitherEntity testEntity = new WitherEntity(EntityType.WITHER , world);
-            testEntity.setPosition(pos.getX() + 0.5 , pos.getY() + 4.5, pos.getZ() + 0.5);
-            world.spawnEntity(testEntity);
+
             world.playSound(player, pos, SoundEvents.BLOCK_COMPARATOR_CLICK, SoundCategory.BLOCKS, 1.0F, 1.0F);
             return ActionResult.SUCCESS;
         }

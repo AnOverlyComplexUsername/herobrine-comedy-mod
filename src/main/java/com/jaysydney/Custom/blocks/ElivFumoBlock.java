@@ -1,7 +1,6 @@
 package com.jaysydney.Custom.blocks;
 
 import com.jaysydney.Custom.ModSounds;
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

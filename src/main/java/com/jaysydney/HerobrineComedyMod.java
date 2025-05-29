@@ -28,6 +28,7 @@ public class HerobrineComedyMod implements ModInitializer {
 		ModBlockEntities.initialize();
 		ModEntities.initialize();
 		ModDimensions.initialize();
+		
 		LOGGER.info("Hello Fabric world!");
 	}
 }
