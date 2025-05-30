@@ -1,6 +1,8 @@
 package com.jaysydney.Custom.blocks;
 
+import com.jaysydney.Custom.ModEntities;
 import com.jaysydney.Custom.ModSounds;
+import com.jaysydney.Custom.enetities.HerobrineRaidEntity;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -34,6 +36,12 @@ public class ElivFumoBlock extends HorizontalFacingBlock {
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit)
     {
+        if(!world.isClient)
+        {
+            HerobrineRaidEntity testEntity = new HerobrineRaidEntity(ModEntities.HEROBRINESARMY, world);
+            testEntity.setPos(pos.getX(), pos.getY()+2, pos.getZ());
+            world.spawnEntity(testEntity);
+        }
         world.playSound(player,pos, ModSounds.EVIL_PLUSH, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
         return ActionResult.SUCCESS;
