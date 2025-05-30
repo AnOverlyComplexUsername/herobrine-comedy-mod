@@ -30,7 +30,6 @@ public class HerobrineRaidEntity extends Entity {
     private final int raidBoundsX2 = 30; // how wide the spawn area will be
     public static WeightedList<EntityType<?>> POSSIBLEMOBS = new WeightedList<>(); //weighted List of possible mob spawns; static and created on intialization
 
-
     private ServerBossBar bossBar = new ServerBossBar(
             Text.literal("Herobrine's Army: Wave " + wave),
             BossBar.Color.RED, BossBar.Style.NOTCHED_12);
@@ -52,12 +51,20 @@ public class HerobrineRaidEntity extends Entity {
 
     @Override
     protected void readCustomDataFromNbt(NbtCompound nbt) {
-
+        this.wave = nbt.getInt("Wave", 0);
+        this.raidStart = nbt.getBoolean("RaidStart", false);
+        this.raidMaxHealth = nbt.getFloat("RaidMaxHealth", 0);
+        this.curRaidHealth = nbt.getFloat("CurRaidHealth", 0);
     }
 
     @Override
     protected void writeCustomDataToNbt(NbtCompound nbt) {
-
+        nbt.putFloat("RaidMaxHealth", this.raidMaxHealth);
+        nbt.putFloat("CurRaidHealth", this.curRaidHealth);
+        nbt.putBoolean("RaidStart", this.raidStart);
+        nbt.putInt("Wave", this.wave);
+        nbt.putInt("RaidBoundsX1", this.raidBoundsX1);
+        nbt.putInt("RaidBoundsX2", this.raidBoundsX2);
     }
 
     // raid logic
