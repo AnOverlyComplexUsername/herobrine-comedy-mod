@@ -17,7 +17,7 @@ public class HerobrineComedyModClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		// This entrypoint is suitable for setting up client-specific logic, such as
 		// rendering.
-		EntityRendererRegistry.register((EntityType<? extends PigEntity>) ModEntities.HEROBRINESARMY, (context) -> {return new HerobrineRaidRenderer(context);});
+		EntityRendererRegistry.register((EntityType<? extends PigEntity>) ModEntities.HEROBRINESARMY, HerobrineRaidRenderer::new);
 		FabricDefaultAttributeRegistry.register((EntityType<? extends LivingEntity>) ModEntities.HEROBRINESARMY, HerobrineRaidEntity.createPigAttributes());
 
 	}

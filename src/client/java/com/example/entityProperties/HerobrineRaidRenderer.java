@@ -12,7 +12,7 @@ public class HerobrineRaidRenderer extends PigEntityRenderer {
 
     @Override
     public PigEntityRenderState createRenderState() {
-        return null;
+        return new PigEntityRenderState();
     }
 
 

@@ -25,7 +25,7 @@ import java.util.ArrayList;
 // container class for the raid :3
 public class HerobrineRaidEntity extends PigEntity {
 
-    private ArrayList<HostileEntity> raidMobs; //list of all mobs in raid
+    private ArrayList<HostileEntity> raidMobs = new ArrayList<>(); //list of all mobs in raid
     private int wave = 1; // higher waves == more difficulty, scales equipment and # of mob spawns
     private boolean raidStart = false; //used for a fill up animation before hand
     private float raidMaxHealth; // max hp of all mobs in raid
@@ -75,7 +75,6 @@ public class HerobrineRaidEntity extends PigEntity {
 
     // raid logic
     public void startRaid() { //starts raid and creates mobs
-        raidStart = true;
         raidMaxHealth = 0;
         curRaidHealth = 0;
         int waveSizeMax = (int) (wave * 4.5);
@@ -90,6 +89,8 @@ public class HerobrineRaidEntity extends PigEntity {
             raidMaxHealth += raidMob.getHealth();
         }
         curRaidHealth = raidMaxHealth;
+
+        raidStart = true;
 
     }
 
@@ -115,7 +116,7 @@ public class HerobrineRaidEntity extends PigEntity {
         else
         {
             super.tick();
-            if (this.bossBar.getPercent() >= 100)
+            if (curRaidHealth / raidMaxHealth >= 1.0)
             {
                 startRaid();
             }
