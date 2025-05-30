@@ -3,23 +3,26 @@ package com.jaysydney.Custom.enetities;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.boss.BossBar;
 import net.minecraft.entity.boss.ServerBossBar;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
+import net.minecraft.util.Arm;
 import net.minecraft.world.World;
 import com.jaysydney.Custom.Utils.WeightedList;
 
 import java.util.ArrayList;
 
 // container class for the raid :3
-public class HerobrineRaidEntity extends Entity {
+public class HerobrineRaidEntity extends PigEntity {
 
     private ArrayList<HostileEntity> raidMobs; //list of all mobs in raid
     private int wave = 1; // higher waves == more difficulty, scales equipment and # of mob spawns
@@ -35,7 +38,7 @@ public class HerobrineRaidEntity extends Entity {
             BossBar.Color.RED, BossBar.Style.NOTCHED_12);
 
     public HerobrineRaidEntity(EntityType<?> type, World world) {
-        super(type, world);
+        super((EntityType<? extends PigEntity>) type, world);
         raidMaxHealth = 1000;
     }
 
@@ -50,7 +53,8 @@ public class HerobrineRaidEntity extends Entity {
     }
 
     @Override
-    protected void readCustomDataFromNbt(NbtCompound nbt) {
+    public void readCustomDataFromNbt(NbtCompound nbt) {
+        super.readCustomDataFromNbt(nbt);
         this.wave = nbt.getInt("Wave", 0);
         this.raidStart = nbt.getBoolean("RaidStart", false);
         this.raidMaxHealth = nbt.getFloat("RaidMaxHealth", 0);
@@ -58,7 +62,8 @@ public class HerobrineRaidEntity extends Entity {
     }
 
     @Override
-    protected void writeCustomDataToNbt(NbtCompound nbt) {
+    public void writeCustomDataToNbt(NbtCompound nbt) {
+        super.writeCustomDataToNbt(nbt);
         nbt.putFloat("RaidMaxHealth", this.raidMaxHealth);
         nbt.putFloat("CurRaidHealth", this.curRaidHealth);
         nbt.putBoolean("RaidStart", this.raidStart);
@@ -116,6 +121,11 @@ public class HerobrineRaidEntity extends Entity {
             curRaidHealth += 10;
             this.bossBar.setPercent(curRaidHealth / raidMaxHealth);
         }
+    }
+
+    @Override
+    public Arm getMainArm() {
+        return null;
     }
 
     @Override
