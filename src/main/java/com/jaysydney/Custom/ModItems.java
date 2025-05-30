@@ -34,6 +34,7 @@ public class ModItems {
             new Item.Settings().food(new FoodComponent.Builder().nutrition(3).saturationModifier(5).build(), BLIND_FOOD_CONSUMABLE_COMPONENT));
 
 
+
     public static Item register(String name, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
         // Create the item key.
         RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, Identifier.of(HerobrineComedyMod.MOD_ID, name));

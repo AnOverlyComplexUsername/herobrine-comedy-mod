@@ -9,6 +9,7 @@ import net.minecraft.entity.boss.BossBar;
 import net.minecraft.entity.boss.ServerBossBar;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -44,7 +45,7 @@ public class HerobrineRaidEntity extends PigEntity {
 
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
-
+        super.initDataTracker(builder);
     }
 
     @Override
