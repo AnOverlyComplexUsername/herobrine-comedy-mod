@@ -87,9 +87,8 @@ public class HerobrineRaidEntity extends PigEntity {
             raidMob.setPosition(this.getX(), this.getY(), this.getZ());
             getWorld().spawnEntity(raidMob);
             raidMaxHealth += raidMob.getHealth();
+            curRaidHealth += raidMob.getHealth();
         }
-        curRaidHealth = raidMaxHealth;
-
         raidStart = true;
 
     }
@@ -105,12 +104,26 @@ public class HerobrineRaidEntity extends PigEntity {
 
     @Override
     public void tick() {
+        if(wave <= 3)
+        {
+            this.discard();
+        }
+
         if (raidStart) {
+
+            curRaidHealth = 0;
             super.tick();
             this.raidMobs.forEach(entity -> {
                 curRaidHealth += entity.getHealth();
             });
             this.bossBar.setPercent(curRaidHealth / raidMaxHealth);
+            if(curRaidHealth / raidMaxHealth <= 0)
+            {
+                raidStart = false;
+                wave ++;
+                raidMaxHealth = 800;
+                bossBar.setName(Text.literal("Herobrine's Army: Wave " + wave));
+            }
 
         }
         else
@@ -121,7 +134,7 @@ public class HerobrineRaidEntity extends PigEntity {
                 startRaid();
             }
             curRaidHealth += 10;
-            this.bossBar.setPercent(curRaidHealth / raidMaxHealth);
+            this.bossBar.setPercent((float) Math.clamp(curRaidHealth / raidMaxHealth,0,1.0));
         }
     }
 
