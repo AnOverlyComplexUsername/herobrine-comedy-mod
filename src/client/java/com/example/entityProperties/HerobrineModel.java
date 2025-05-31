@@ -7,6 +7,7 @@ import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 
 public class HerobrineModel extends EntityModel<HerobrineRenderState> {
     public static final EntityModelLayer HEROBRINE = new EntityModelLayer(Identifier.of(HerobrineComedyMod.MOD_ID,"herobrine"), "main");
@@ -101,7 +102,22 @@ public class HerobrineModel extends EntityModel<HerobrineRenderState> {
         return TexturedModelData.of(modelData, 64, 64);
     }
 
-    //@Override
-    public void setAngles(EntityHerobrine entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    @Override
+    public void setAngles(HerobrineRenderState state){
+        super.setAngles(state);
+        this.setHeadAngles(state.relativeHeadYaw, state.pitch);
+        //this.animateWalking(MantisAnimations.ANIM_MANTIS_WALK, state.limbSwingAnimationProgress, state.limbSwingAmplitude, 2f, 2.5f);
+        //to be added with walking animation
+        this.animate(state.idleAnimationState, HerobrineAnimations.ANIM_HEROBRINE_IDLE, state.age, 1f);
     }
+
+    //allows head movement
+    private void setHeadAngles(float headYaw, float headPitch) {
+        headYaw = MathHelper.clamp(headYaw, -30.0F, 30.0F);
+        headPitch = MathHelper.clamp(headPitch, -25.0F, 45.0F);
+
+        this.head.yaw = headYaw * 0.017453292F;
+        this.head.pitch = headPitch * 0.017453292F;
+    }
+    
 }

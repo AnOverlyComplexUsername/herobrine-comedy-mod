@@ -9,12 +9,12 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
 
-
+//MobEntityRenderer<MantisEntity, MantisRenderState, MantisModel> {
 public class HerobrineRenderer extends MobEntityRenderer<EntityHerobrine, HerobrineRenderState, HerobrineModel> {
 
     public HerobrineRenderer(EntityRendererFactory.Context context) {
         super(context, new HerobrineModel(context.getPart(HerobrineModel.HEROBRINE)), 0.5f);
-    }
+    }   
 
 
     @Override
