@@ -1,6 +1,9 @@
 package com.jaysydney.Custom.blocks;
 
 import com.jaysydney.Custom.ModDimensions;
+import com.jaysydney.Custom.ModEntities;
+import com.jaysydney.Custom.enetities.EntityHerobrine;
+import com.jaysydney.Custom.enetities.HerobrineRaidEntity;
 import com.jaysydney.Custom.enetities.NetherReactorCoreEntity;
 import com.jaysydney.HerobrineComedyMod;
 import com.mojang.serialization.MapCodec;
@@ -75,17 +78,14 @@ public class NetherReactorCoreBlock extends BlockWithEntity  {
                                         TeleportTarget.NO_OP);
                         placer.loadStructure();
                         serverPlayer.teleportTo(target);
-                        WitherEntity testEntity = new WitherEntity(EntityType.WITHER , serverPlayer.getServerWorld());
-                        testEntity.setPosition(new Vec3d(28f,105f,24f));
+                        HerobrineRaidEntity testEntity = new HerobrineRaidEntity(ModEntities.HEROBRINESARMY, serverPlayer.getServerWorld());
+                        testEntity.setPosition(new Vec3d(9f,109f,22f));
                         world.spawnEntity(testEntity);
                     }
                 }
             }
             // Flip the value of activated and save the new blockstate.
             world.setBlockState(pos, state.with(ACTIVATED, Boolean.TRUE));
-            //TODO: ADD EVENT WHEN TRIGGERED SUCCESSFULLY
-            // EVENT SHOULD TURN ALL BLOCKS INTO OBSIDIAN AND SPAWN HEROBRINE (ALSO MAYBE ADD LIGHTNING)
-
             world.playSound(player, pos, SoundEvents.BLOCK_COMPARATOR_CLICK, SoundCategory.BLOCKS, 1.0F, 1.0F);
             return ActionResult.SUCCESS;
         }
