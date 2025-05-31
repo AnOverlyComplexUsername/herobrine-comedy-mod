@@ -10,6 +10,8 @@ import net.minecraft.entity.boss.ServerBossBar;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -40,6 +42,10 @@ public class HerobrineRaidEntity extends PigEntity {
 
     public HerobrineRaidEntity(EntityType<?> type, World world) {
         super((EntityType<? extends PigEntity>) type, world);
+        this.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 3000000,256));
+        this.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 3000000,256));
+        this.cannotDespawn();
+        this.canFreeze();
         raidMaxHealth = 1000;
     }
 
@@ -104,7 +110,7 @@ public class HerobrineRaidEntity extends PigEntity {
 
     @Override
     public void tick() {
-        if(wave <= 3)
+        if(wave >= 3)
         {
             this.discard();
         }
