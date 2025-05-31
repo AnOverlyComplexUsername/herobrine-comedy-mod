@@ -1,0 +1,18 @@
+{
+  "type": "herobrinecomedymod:herobrinedim",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "biome": "herobrinecomedymod:herobrines_domain",
+      "lakes": false,
+      "features": false,
+      "layers": [
+        {
+          "height": 0,
+          "block": "minecraft:air"
+        }
+      ],
+      "structure_overrides": []
+    }
+  }
+}

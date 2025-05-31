@@ -1,4 +1,5 @@
 package com.jaysydney.Custom;
+import com.jaysydney.Custom.blocks.ElivFumoBlock;
 import com.jaysydney.Custom.blocks.NetherReactorCoreBlock;
 import com.jaysydney.HerobrineComedyMod;
 
@@ -22,6 +23,14 @@ public class ModBlocks {
             NetherReactorCoreBlock::new,
             AbstractBlock.Settings.create().hardness(3f).resistance(6f).
                     sounds(ModSounds.SOUND_BLOCk_SOUNDS).luminance(NetherReactorCoreBlock::getLuminance),
+            true
+    );
+
+    public static final ElivFumoBlock ELIV_FUMO_BLOCK = (ElivFumoBlock) register(
+      "eliv_fumo_block",
+            ElivFumoBlock::new,
+            AbstractBlock.Settings.create().hardness(1f).resistance(1f).
+                    sounds(BlockSoundGroup.WOOL).nonOpaque().burnable(),
             true
     );
 
@@ -59,6 +68,7 @@ public class ModBlocks {
     public static void initialize() {
         ItemGroupEvents.modifyEntriesEvent(ModItemGroups.MOD_ITEMS_GROUP_KEY).register((itemGroup) -> {
         itemGroup.add(ModBlocks.NETHER_REACTOR_CORE.asItem());
+        itemGroup.add(ModBlocks.ELIV_FUMO_BLOCK.asItem());
     });}
 
 }

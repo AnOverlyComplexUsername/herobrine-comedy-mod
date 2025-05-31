@@ -1,7 +1,9 @@
 package com.jaysydney.Custom;
 
 import com.jaysydney.Custom.enetities.EntityHerobrine;
+import com.jaysydney.Custom.enetities.HerobrineRaidEntity;
 import com.jaysydney.HerobrineComedyMod;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -20,6 +22,10 @@ public class ModEntities {
         EntityType.Builder.create(EntityHerobrine::new, SpawnGroup.MONSTER).dimensions(1f,2f)
                 .makeFireImmune());
 
+    public static final EntityType<?> HEROBRINESARMY =
+            register("herobrines_army",
+                    EntityType.Builder.create(HerobrineRaidEntity::new, SpawnGroup.MISC)
+                            .makeFireImmune().dropsNothing().dimensions(0.1f, 0.1f));
 
     public static EntityType<?> register(String name, EntityType.Builder<?> settings) {
         // Create the item key.
@@ -37,7 +43,7 @@ public class ModEntities {
     }
     public static void initialize() {
 
-
+        HerobrineRaidEntity.initMobTable();
         HerobrineComedyMod.LOGGER.info("Registering Custom Entities for: " + HerobrineComedyMod.MOD_ID);
 
     }

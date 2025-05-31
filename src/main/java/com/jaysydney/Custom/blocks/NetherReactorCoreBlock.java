@@ -1,27 +1,34 @@
 package com.jaysydney.Custom.blocks;
 
+import com.jaysydney.Custom.ModDimensions;
 import com.jaysydney.Custom.enetities.NetherReactorCoreEntity;
+import com.jaysydney.HerobrineComedyMod;
 import com.mojang.serialization.MapCodec;
+import me.emafire003.dev.structureplacerapi.StructurePlacerAPI;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.boss.WitherEntity;
-import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.BlockRotation;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
-
-public class NetherReactorCoreBlock extends BlockWithEntity {
+public class NetherReactorCoreBlock extends BlockWithEntity  {
     public static final BooleanProperty ACTIVATED = BooleanProperty.of("activated");
 
     public NetherReactorCoreBlock(Settings settings) {
@@ -46,13 +53,39 @@ public class NetherReactorCoreBlock extends BlockWithEntity {
         boolean activated = state.get(ACTIVATED);
         if(!activated && checkAroundBlock(world,pos) && checkStructurePresent(world,pos) )
         {
+            if (!world.isClient) 
+            {
+                MinecraftServer server = world.getServer();
+                if (server != null)
+                {
+                    ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
+                   ServerWorld herobrineWorld = server.getWorld(ModDimensions.HEROBRINE_WORLD);
+
+                    if(herobrineWorld != null)
+                    {
+                        StructurePlacerAPI placer = new StructurePlacerAPI(herobrineWorld,
+                                Identifier.of(HerobrineComedyMod.MOD_ID,"herobrine_stadium"),
+                                new BlockPos(0,98,0), BlockMirror.NONE, BlockRotation.NONE,
+                                true,1.0f, new BlockPos(0,0,0));
+                        TeleportTarget target =
+                                new TeleportTarget(herobrineWorld,
+                                new Vec3d(28f,100.5f,24.2f),
+                                new Vec3d(0,0,0),
+                                        serverPlayer.getYaw(),serverPlayer.getPitch(),
+                                        TeleportTarget.NO_OP);
+                        placer.loadStructure();
+                        serverPlayer.teleportTo(target);
+                        WitherEntity testEntity = new WitherEntity(EntityType.WITHER , serverPlayer.getServerWorld());
+                        testEntity.setPosition(new Vec3d(28f,105f,24f));
+                        world.spawnEntity(testEntity);
+                    }
+                }
+            }
             // Flip the value of activated and save the new blockstate.
             world.setBlockState(pos, state.with(ACTIVATED, Boolean.TRUE));
             //TODO: ADD EVENT WHEN TRIGGERED SUCCESSFULLY
             // EVENT SHOULD TURN ALL BLOCKS INTO OBSIDIAN AND SPAWN HEROBRINE (ALSO MAYBE ADD LIGHTNING)
-            WitherEntity testEntity = new WitherEntity(EntityType.WITHER , world);
-            testEntity.setPosition(pos.getX() + 0.5 , pos.getY() + 4.5, pos.getZ() + 0.5);
-            world.spawnEntity(testEntity);
+
             world.playSound(player, pos, SoundEvents.BLOCK_COMPARATOR_CLICK, SoundCategory.BLOCKS, 1.0F, 1.0F);
             return ActionResult.SUCCESS;
         }
