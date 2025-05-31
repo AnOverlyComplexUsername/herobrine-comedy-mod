@@ -1,6 +1,5 @@
 package com.example.entityProperties;
 
-import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.model.PigEntityModel;
