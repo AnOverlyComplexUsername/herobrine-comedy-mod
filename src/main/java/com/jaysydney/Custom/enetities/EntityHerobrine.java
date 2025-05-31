@@ -20,12 +20,17 @@ import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.ai.goal.ZombieAttackGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 
-
 //TODO: WORK ON THIS
 public class EntityHerobrine extends PathAwareEntity {
     //animation states TBD??
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
+
+    @Override
+    public net.minecraft.util.Arm getMainArm() {
+        // Return the main arm, usually RIGHT for most entities
+        return net.minecraft.util.Arm.RIGHT;
+    }
 
 
     public EntityHerobrine(EntityType<? extends PathAwareEntity> type, World world) {

@@ -25,6 +25,7 @@ public class ModEntities {
         // Create the item key.
         RegistryKey<EntityType<?>> entityKey = RegistryKey.of(RegistryKeys.ENTITY_TYPE,
                 Identifier.of(HerobrineComedyMod.MOD_ID, name));
+            
 
         // Create the item instance.
         EntityType<?> entity = settings.build(entityKey);
