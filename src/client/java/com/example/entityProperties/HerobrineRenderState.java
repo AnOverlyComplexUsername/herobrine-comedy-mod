@@ -1,4 +1,4 @@
-package com.jaysydney.Custom.client;
+package com.example.entityProperties;
 
 import net.minecraft.client.render.entity.state.LivingEntityRenderState;
 import net.minecraft.entity.AnimationState;

@@ -1,25 +1,14 @@
-package com.jaysydney.Custom.client;
+package com.example.entityProperties;
 
 import com.jaysydney.Custom.enetities.EntityHerobrine;
 
 import com.jaysydney.HerobrineComedyMod;
-import net.minecraft.client.model.Dilation;
-import net.minecraft.client.model.ModelData;
-import net.minecraft.client.model.ModelPart;
-import net.minecraft.client.model.ModelPartBuilder;
-import net.minecraft.client.model.ModelPartData;
-import net.minecraft.client.model.ModelTransform;
-import net.minecraft.client.model.TexturedModelData;
-import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.client.render.entity.state.EntityRenderState;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
-import java.util.Arrays;
-
-public class HerobrineModel extends EntityModel<EntityRenderState> {
+public class HerobrineModel extends EntityModel<HerobrineRenderState> {
     public static final EntityModelLayer HEROBRINE = new EntityModelLayer(Identifier.of(HerobrineComedyMod.MOD_ID,"herobrine"), "main");
     private final ModelPart root;
 
@@ -114,14 +103,5 @@ public class HerobrineModel extends EntityModel<EntityRenderState> {
 
     //@Override
     public void setAngles(EntityHerobrine entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-}
-
-    //@Override
-    public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
-       //optimize this with this.getparts --> for each then execute render
-        for (ModelPart modelPart : Arrays.asList(head,headwear, body, jacket, left_arm, left_sleeve, right_arm, right_sleeve, left_leg, left_pants, right_leg, right_pants)) {
-            modelPart.render(matrices, vertexConsumer, light, overlay);
-
-        }
     }
 }

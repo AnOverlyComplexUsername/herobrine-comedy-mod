@@ -1,4 +1,4 @@
-package com.jaysydney.Custom.client;
+package com.example.entityProperties;
 
 import com.jaysydney.Custom.enetities.EntityHerobrine;
 import com.jaysydney.HerobrineComedyMod;

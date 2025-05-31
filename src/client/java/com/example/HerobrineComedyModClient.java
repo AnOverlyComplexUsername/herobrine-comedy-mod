@@ -2,8 +2,8 @@ package com.example;
 
 import com.example.entityProperties.HerobrineRaidRenderer;
 import com.jaysydney.Custom.ModEntities;
-import com.jaysydney.Custom.client.HerobrineModel;
-import com.jaysydney.Custom.client.HerobrineRenderer;
+import com.example.entityProperties.HerobrineModel;
+import com.example.entityProperties.HerobrineRenderer;
 import com.jaysydney.Custom.enetities.EntityHerobrine;
 import com.jaysydney.Custom.enetities.HerobrineRaidEntity;
 import net.fabricmc.api.ClientModInitializer;
@@ -12,7 +12,6 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.PigEntity;
 
 
