@@ -7,6 +7,7 @@ import net.minecraft.entity.AnimationState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -21,7 +22,7 @@ import net.minecraft.entity.ai.goal.ZombieAttackGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 
 //TODO: WORK ON THIS
-public class EntityHerobrine extends PathAwareEntity {
+public class EntityHerobrine extends HostileEntity {
     //animation states TBD??
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
@@ -34,7 +35,7 @@ public class EntityHerobrine extends PathAwareEntity {
 
 
     public EntityHerobrine(EntityType<? extends PathAwareEntity> type, World world) {
-        super(type, world);
+        super((EntityType<? extends HostileEntity>) type, world);
     }
 
     @Override //determines entity behavior
@@ -54,7 +55,7 @@ public class EntityHerobrine extends PathAwareEntity {
                 .add(net.minecraft.entity.attribute.EntityAttributes.MAX_HEALTH, 100.0D)
                 .add(net.minecraft.entity.attribute.EntityAttributes.MOVEMENT_SPEED, 0.35D)
                 .add(net.minecraft.entity.attribute.EntityAttributes.ATTACK_DAMAGE, 10.0D)
-                .add(net.minecraft.entity.attribute.EntityAttributes.FOLLOW_RANGE, 20);//necessary?
+                .add(net.minecraft.entity.attribute.EntityAttributes.FOLLOW_RANGE, 40);//necessary?
                 //tutorial had these all listed as generic but they didnt compile
                 //all temp values
     }
@@ -83,7 +84,7 @@ public class EntityHerobrine extends PathAwareEntity {
 
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
-
+        super.initDataTracker(builder);
     }
 
     @Override

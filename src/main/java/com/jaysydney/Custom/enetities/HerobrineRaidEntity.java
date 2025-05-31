@@ -111,7 +111,7 @@ public class HerobrineRaidEntity extends PigEntity {
 
     @Override
     public void tick() {
-        if(wave >= 3)
+        if(wave >= 4)
         {
             this.discard();
         }
