@@ -43,7 +43,8 @@ public class HerobrineRaidEntity extends PigEntity {
     public HerobrineRaidEntity(EntityType<?> type, World world) {
         super((EntityType<? extends PigEntity>) type, world);
         this.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 3000000,256));
-        this.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 3000000,256));
+        this.addStatusEffect(new StatusEffectInstance(StatusEffects.INVISIBILITY, 3000000,256));
+
         this.cannotDespawn();
         this.canFreeze();
         raidMaxHealth = 1000;
