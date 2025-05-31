@@ -2,6 +2,7 @@ package com.jaysydney.Custom.enetities;
 
 
 
+import com.jaysydney.Custom.ModSounds;
 import net.minecraft.entity.AnimationState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.boss.BossBar;
@@ -11,6 +12,7 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
 import net.minecraft.entity.player.PlayerEntity;
@@ -59,6 +61,11 @@ public class EntityHerobrine extends HostileEntity {
                 .add(net.minecraft.entity.attribute.EntityAttributes.FOLLOW_RANGE, 40);//necessary?
                 //tutorial had these all listed as generic but they didnt compile
                 //all temp values
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSounds.EVIL_SCREAM;
     }
 
     //animation methods go here

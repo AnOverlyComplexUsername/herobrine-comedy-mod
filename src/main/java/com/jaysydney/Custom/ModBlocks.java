@@ -22,7 +22,7 @@ public class ModBlocks {
             "nether_reactor_core",
             NetherReactorCoreBlock::new,
             AbstractBlock.Settings.create().hardness(3f).resistance(6f).
-                    sounds(ModSounds.SOUND_BLOCk_SOUNDS).luminance(NetherReactorCoreBlock::getLuminance),
+                    sounds(BlockSoundGroup.IRON).luminance(NetherReactorCoreBlock::getLuminance),
             true
     );
 

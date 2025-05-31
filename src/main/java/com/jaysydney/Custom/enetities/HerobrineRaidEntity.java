@@ -19,6 +19,8 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Arm;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import com.jaysydney.Custom.Utils.WeightedList;
 
@@ -35,16 +37,16 @@ public class HerobrineRaidEntity extends PigEntity {
     private final int raidBoundsX1 = 16; //how long the spawn area will be
     private final int raidBoundsX2 = 30; // how wide the spawn area will be
     public static WeightedList<EntityType<?>> POSSIBLEMOBS = new WeightedList<>(); //weighted List of possible mob spawns; static and created on intialization
-
+    private Vec3d pos = new Vec3d(0.0D, 0.0D, 0.0D);
     private ServerBossBar bossBar = new ServerBossBar(
             Text.literal("Herobrine's Army: Wave " + wave),
             BossBar.Color.RED, BossBar.Style.NOTCHED_12);
 
-    public HerobrineRaidEntity(EntityType<?> type, World world) {
+    public HerobrineRaidEntity(EntityType<?> type, World world, Vec3d pos) {
         super((EntityType<? extends PigEntity>) type, world);
         this.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 3000000,256));
         this.addStatusEffect(new StatusEffectInstance(StatusEffects.INVISIBILITY, 3000000,256));
-
+        this.pos = pos;
         this.cannotDespawn();
         this.canFreeze();
         raidMaxHealth = 1000;
