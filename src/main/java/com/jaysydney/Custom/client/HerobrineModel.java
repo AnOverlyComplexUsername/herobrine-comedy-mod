@@ -2,6 +2,7 @@ package com.jaysydney.Custom.client;
 
 import com.jaysydney.Custom.enetities.EntityHerobrine;
 
+import com.jaysydney.HerobrineComedyMod;
 import net.minecraft.client.model.Dilation;
 import net.minecraft.client.model.ModelData;
 import net.minecraft.client.model.ModelPart;
@@ -11,10 +12,15 @@ import net.minecraft.client.model.ModelTransform;
 import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
+import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.render.entity.state.EntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.Identifier;
+
+import java.util.Arrays;
 
 public class HerobrineModel extends EntityModel<EntityRenderState> {
+    public static final EntityModelLayer HEROBRINE = new EntityModelLayer(Identifier.of(HerobrineComedyMod.MOD_ID,"herobrine"), "main");
     private final ModelPart root;
 
     private final ModelPart head;
@@ -32,7 +38,7 @@ public class HerobrineModel extends EntityModel<EntityRenderState> {
 
     public HerobrineModel(ModelPart root) {
         super(root);//this probably doesn't work??
-        this.root = root;
+        this.root = root.getChild("root");
         this.head = root.getChild("head");
         this.headwear = root.getChild("headwear");
         this.body = root.getChild("body");
@@ -112,17 +118,10 @@ public class HerobrineModel extends EntityModel<EntityRenderState> {
 
     //@Override
     public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
-        head.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-        headwear.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-        body.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-        jacket.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-        left_arm.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-        left_sleeve.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-        right_arm.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-        right_sleeve.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-        left_leg.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-        left_pants.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-        right_leg.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-        right_pants.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+       //optimize this with this.getparts --> for each then execute render
+        for (ModelPart modelPart : Arrays.asList(head,headwear, body, jacket, left_arm, left_sleeve, right_arm, right_sleeve, left_leg, left_pants, right_leg, right_pants)) {
+            modelPart.render(matrices, vertexConsumer, light, overlay);
+
+        }
     }
 }

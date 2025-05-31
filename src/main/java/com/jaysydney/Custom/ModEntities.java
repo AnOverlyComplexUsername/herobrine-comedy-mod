@@ -3,11 +3,8 @@ package com.jaysydney.Custom;
 import com.jaysydney.Custom.enetities.EntityHerobrine;
 import com.jaysydney.Custom.enetities.HerobrineRaidEntity;
 import com.jaysydney.HerobrineComedyMod;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -18,7 +15,7 @@ import java.util.function.Function;
 
 public class ModEntities {
 
-    public static final EntityType<?> HEROBRINE = register("herobrine",
+    public static final EntityType<EntityHerobrine> HEROBRINE = (EntityType<EntityHerobrine>) register("herobrine",
         EntityType.Builder.create(EntityHerobrine::new, SpawnGroup.MONSTER).dimensions(1f,2f)
                 .makeFireImmune());
 

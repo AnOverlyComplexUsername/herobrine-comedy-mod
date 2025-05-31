@@ -1,26 +1,47 @@
 package com.jaysydney.Custom.client;
 
-import net.minecraft.client.render.entity.animation.Animation;
-import net.minecraft.client.render.entity.animation.AnimationHelper;
-import net.minecraft.client.render.entity.animation.Keyframe;
-import net.minecraft.client.render.entity.animation.Transformation;
+import com.jaysydney.Custom.enetities.EntityHerobrine;
+import com.jaysydney.HerobrineComedyMod;
+import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.client.render.entity.MobEntityRenderer;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.Identifier;
 
-public class HerobrineRenderer {
-    public static final Animation ANIM_HEROBRINE_IDLE = Animation.Builder.create(2f).looping()
-.addBoneAnimation("left_arm",
-    new Transformation(Transformation.Targets.ROTATE,
-        new Keyframe(0f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
-            Transformation.Interpolations.LINEAR),
-        new Keyframe(1f, AnimationHelper.createRotationalVector(0f, 0f, -2.5f),
-            Transformation.Interpolations.LINEAR),
-        new Keyframe(2f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
-            Transformation.Interpolations.LINEAR)))
-.addBoneAnimation("right_arm",
-    new Transformation(Transformation.Targets.ROTATE,
-        new Keyframe(0f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
-            Transformation.Interpolations.LINEAR),
-        new Keyframe(1f, AnimationHelper.createRotationalVector(0f, 0f, 2.5f),
-            Transformation.Interpolations.LINEAR),
-        new Keyframe(2f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
-            Transformation.Interpolations.LINEAR))).build();
+
+
+public class HerobrineRenderer extends MobEntityRenderer<EntityHerobrine, HerobrineRenderState, HerobrineModel> {
+
+    public HerobrineRenderer(EntityRendererFactory.Context context) {
+        super(context, new HerobrineModel(context.getPart(HerobrineModel.HEROBRINE)), 0.5f);
+    }
+
+
+    @Override
+    public void render(HerobrineRenderState state, MatrixStack matrixStack,
+                       VertexConsumerProvider vertexConsumerProvider, int i) {
+        if(state.baby) {
+            matrixStack.scale(0.5f, 0.5f, 0.5f);
+        } else {
+            matrixStack.scale(1f, 1f, 1f);
+        }
+
+        super.render(state, matrixStack, vertexConsumerProvider, i);
+    }
+
+    @Override
+    public HerobrineRenderState createRenderState() {
+        return new HerobrineRenderState();
+    }
+
+    @Override
+    public void updateRenderState(EntityHerobrine livingEntity, HerobrineRenderState livingEntityRenderState, float f) {
+        super.updateRenderState(livingEntity, livingEntityRenderState, f);
+        livingEntityRenderState.idleAnimationState.copyFrom(livingEntity.idleAnimationState);
+    }
+
+    @Override
+    public Identifier getTexture(HerobrineRenderState state) {
+        return Identifier.of(HerobrineComedyMod.MOD_ID,"textures/entity/herobrine.png");
+    }
 }
