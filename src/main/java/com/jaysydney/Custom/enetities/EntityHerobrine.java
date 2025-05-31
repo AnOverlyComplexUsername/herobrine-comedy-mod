@@ -7,6 +7,7 @@ import net.minecraft.entity.AnimationState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.boss.BossBar;
 import net.minecraft.entity.boss.ServerBossBar;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
@@ -21,6 +22,7 @@ import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
 import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import org.jetbrains.annotations.Nullable;
 
 //TODO: WORK ON THIS
 public class EntityHerobrine extends HostileEntity {
@@ -63,9 +65,16 @@ public class EntityHerobrine extends HostileEntity {
                 //all temp values
     }
 
+    @Nullable
     @Override
     protected SoundEvent getDeathSound() {
         return ModSounds.EVIL_SCREAM;
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return ModSounds.HEROBRINE_OUCH;
     }
 
     //animation methods go here

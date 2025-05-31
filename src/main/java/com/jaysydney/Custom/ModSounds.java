@@ -12,6 +12,7 @@ public class ModSounds {
 
     public static final SoundEvent EVIL_SCREAM = registerSound("evil_scream");
     public static final SoundEvent EVIL_PLUSH = registerSound("evil_plush");
+    public static final SoundEvent HEROBRINE_OUCH = registerSound("herobrine_ouch");
 
 
 

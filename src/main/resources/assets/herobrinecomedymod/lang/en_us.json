@@ -5,6 +5,6 @@
   "item.herobrinecomedymod.eliv_fumo_block" : "Evil Fumo Plush",
   "item.herobrinecomedymod.nether_reactor_core": "Nether Reactor Core",
   "sounds.herobrinecomedymod.evil_plush": "Fumo sounds",
-
+"sounds.herobrinecomedymod.herobrine_ouch" : "Herobrine hurt",
   "itemGroup.herobrinecomedymod": "Moddin it and by it"
 }
