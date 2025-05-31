@@ -15,7 +15,6 @@ public class ModSounds {
 
 
 
-    public static final BlockSoundGroup SOUND_BLOCk_SOUNDS = new BlockSoundGroup(1f,1f ,ModSounds.EVIL_SCREAM,ModSounds.EVIL_SCREAM,ModSounds.EVIL_SCREAM,ModSounds.EVIL_SCREAM,ModSounds.EVIL_SCREAM);
 
     private static SoundEvent registerSound(String id) {
         Identifier identifier = Identifier.of(HerobrineComedyMod.MOD_ID, id);

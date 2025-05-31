@@ -5,8 +5,12 @@
   },
   "evil_plush": {
     "subtitle": "sounds.herobrinecomedymod.evil_plush",
-    "sounds": ["herobrinecomedymod:evil_stop", "herobrinecomedymod:evil_wholesome",
-      "herobrinecomedymod:evil_wink", "herobrinecomedymod:evil_wink_uwu" ]
+    "sounds": [
+      "herobrinecomedymod:evil_stop",
+      "herobrinecomedymod:evil_wholesome",
+      "herobrinecomedymod:evil_wink",
+      "herobrinecomedymod:evil_wink_uwu"
+    ]
   },
   "herobrine_ouch": {
     "subtitle": "sounds.herobrinecomedymod.herobrine_ouch",

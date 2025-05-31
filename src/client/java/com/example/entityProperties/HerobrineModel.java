@@ -1,6 +1,5 @@
 package com.example.entityProperties;
 
-import com.jaysydney.Custom.enetities.EntityHerobrine;
 
 import com.jaysydney.HerobrineComedyMod;
 import net.minecraft.client.model.*;
@@ -83,6 +82,7 @@ public class HerobrineModel extends EntityModel<HerobrineRenderState> {
         this.setHeadAngles(state.relativeHeadYaw, state.pitch);
         //this.animateWalking(MantisAnimations.ANIM_MANTIS_WALK, state.limbSwingAnimationProgress, state.limbSwingAmplitude, 2f, 2.5f);
         //to be added with walking animation
+        this.animateWalking(HerobrineAnimations.WALKING, state.limbSwingAnimationProgress, state.limbSwingAmplitude, 2f, 2.5f);
         this.animate(state.idleAnimationState, HerobrineAnimations.ANIM_HEROBRINE_IDLE, state.age, 1f);
     }
 

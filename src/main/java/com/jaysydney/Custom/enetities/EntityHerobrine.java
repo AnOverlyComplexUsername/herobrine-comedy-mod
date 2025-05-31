@@ -1,24 +1,25 @@
 package com.jaysydney.Custom.enetities;
 
 
-import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
+import com.jaysydney.Custom.ModSounds;
 import net.minecraft.entity.AnimationState;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.boss.BossBar;
+import net.minecraft.entity.boss.ServerBossBar;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
-import net.minecraft.entity.mob.ZombieEntity;
-import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.text.Text;
 import net.minecraft.world.World;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.ai.goal.LookAtEntityGoal;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
 import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
-import net.minecraft.entity.ai.goal.ZombieAttackGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 
 //TODO: WORK ON THIS
@@ -26,6 +27,8 @@ public class EntityHerobrine extends HostileEntity {
     //animation states TBD??
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
+    private ServerBossBar bossBar = new ServerBossBar(Text.literal("Herobrine"),
+            BossBar.Color.RED, BossBar.Style.NOTCHED_10);;
 
     @Override
     public net.minecraft.util.Arm getMainArm() {
@@ -40,7 +43,7 @@ public class EntityHerobrine extends HostileEntity {
 
     @Override //determines entity behavior
     protected void initGoals() {
-        this.goalSelector.add(0, new net.minecraft.entity.ai.goal.MeleeAttackGoal(this, 1.0D, true));
+        this.goalSelector.add(0, new net.minecraft.entity.ai.goal.MeleeAttackGoal(this, 1.0D, false));
         // temp attack goal ^^
         this.goalSelector.add(1, new WanderAroundFarGoal((PathAwareEntity) this, 1.0D));
         this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
@@ -52,12 +55,17 @@ public class EntityHerobrine extends HostileEntity {
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return PathAwareEntity.createMobAttributes() //might replace with MobEntity.createMobAttributes()
-                .add(net.minecraft.entity.attribute.EntityAttributes.MAX_HEALTH, 100.0D)
+                .add(net.minecraft.entity.attribute.EntityAttributes.MAX_HEALTH, 250.0D)
                 .add(net.minecraft.entity.attribute.EntityAttributes.MOVEMENT_SPEED, 0.35D)
                 .add(net.minecraft.entity.attribute.EntityAttributes.ATTACK_DAMAGE, 10.0D)
                 .add(net.minecraft.entity.attribute.EntityAttributes.FOLLOW_RANGE, 40);//necessary?
                 //tutorial had these all listed as generic but they didnt compile
                 //all temp values
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSounds.EVIL_SCREAM;
     }
 
     //animation methods go here
@@ -87,9 +95,25 @@ public class EntityHerobrine extends HostileEntity {
         super.initDataTracker(builder);
     }
 
+
+    //boss bar
+    /* BOSS BAR */
     @Override
-    public boolean damage(ServerWorld world, DamageSource source, float amount) {
-        return false;
+    public void onStartedTrackingBy(ServerPlayerEntity player) {
+        super.onStartedTrackingBy(player);
+        this.bossBar.addPlayer(player);
+    }
+
+    @Override
+    public void onStoppedTrackingBy(ServerPlayerEntity player) {
+        super.onStoppedTrackingBy(player);
+        this.bossBar.removePlayer(player);
+    }
+
+    @Override
+    protected void mobTick(ServerWorld world) {
+        super.mobTick(world);
+        this.bossBar.setPercent(this.getHealth() / this.getMaxHealth());
     }
 
 }

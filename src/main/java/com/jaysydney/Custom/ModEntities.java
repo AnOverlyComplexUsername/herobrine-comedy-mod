@@ -16,7 +16,7 @@ import java.util.function.Function;
 public class ModEntities {
 
     public static final EntityType<EntityHerobrine> HEROBRINE = (EntityType<EntityHerobrine>) register("herobrine",
-        EntityType.Builder.create(EntityHerobrine::new, SpawnGroup.MONSTER).dimensions(1f,2f)
+        EntityType.Builder.create(EntityHerobrine::new, SpawnGroup.MONSTER).dimensions(0.6f,2f)
                 .makeFireImmune());
 
     public static final EntityType<?> HEROBRINESARMY =
