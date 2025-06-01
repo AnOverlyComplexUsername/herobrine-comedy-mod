@@ -1,8 +1,8 @@
 # Fabric Example Mod
 
 ##  Credits
-Arena model used: https://www.minecraft-schematics.com/schematic/19230/ 
-Plushie/fumo model based on https://www.makeship.com/products/evil-neuro-plush
+Arena model used: https://www.minecraft-schematics.com/schematic/19230/   
+Plushie/fumo model based on https://www.makeship.com/products/evil-neuro-plush  
 Assorted SFX from Evil Neuro 
 
 ## Setup
