@@ -76,11 +76,19 @@ public class NetherReactorCoreBlock extends BlockWithEntity  {
                                 new Vec3d(0,0,0),
                                         serverPlayer.getYaw(),serverPlayer.getPitch(),
                                         TeleportTarget.NO_OP);
+                        TeleportTarget raidTarget =
+                                new TeleportTarget(herobrineWorld,
+                                        new Vec3d(9f,109f,22f),
+                                        new Vec3d(0,0,0),
+                                        serverPlayer.getYaw(),serverPlayer.getPitch(),
+                                        TeleportTarget.NO_OP);
                         placer.loadStructure();
                         serverPlayer.teleportTo(target);
                         HerobrineRaidEntity testEntity = new HerobrineRaidEntity(ModEntities.HEROBRINESARMY, serverPlayer.getServerWorld());
-                        testEntity.setPosition(new Vec3d(9f,109f,22f));
-                        world.spawnEntity(testEntity);
+                        testEntity.setPlayerPos(serverPlayer.getPos());
+                        testEntity.teleportTo(raidTarget);
+                        herobrineWorld.spawnEntity(testEntity);
+
                     }
                 }
             }

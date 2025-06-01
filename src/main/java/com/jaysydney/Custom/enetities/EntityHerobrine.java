@@ -15,6 +15,8 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.World;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.ai.goal.LookAtEntityGoal;
@@ -41,14 +43,15 @@ public class EntityHerobrine extends HostileEntity {
 
     public EntityHerobrine(EntityType<? extends PathAwareEntity> type, World world) {
         super((EntityType<? extends HostileEntity>) type, world);
+
     }
 
     @Override //determines entity behavior
     protected void initGoals() {
-        this.goalSelector.add(0, new net.minecraft.entity.ai.goal.MeleeAttackGoal(this, 1.0D, false));
+        this.goalSelector.add(0, new net.minecraft.entity.ai.goal.MeleeAttackGoal(this, 2.0D, false));
         // temp attack goal ^^
         this.goalSelector.add(1, new WanderAroundFarGoal((PathAwareEntity) this, 1.0D));
-        this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 16.0F));
         this.goalSelector.add(3, new LookAroundGoal(this));
 
         //target select goals 50/50 if this works
@@ -61,20 +64,22 @@ public class EntityHerobrine extends HostileEntity {
                 .add(net.minecraft.entity.attribute.EntityAttributes.MOVEMENT_SPEED, 0.35D)
                 .add(net.minecraft.entity.attribute.EntityAttributes.ATTACK_DAMAGE, 10.0D)
                 .add(net.minecraft.entity.attribute.EntityAttributes.FOLLOW_RANGE, 40);//necessary?
-                //tutorial had these all listed as generic but they didnt compile
-                //all temp values
+
     }
 
     @Nullable
     @Override
     protected SoundEvent getDeathSound() {
+        getEntityWorld().getPlayers().getFirst().sendMessage(Text.of("NOOO!!!"), true);
         return ModSounds.EVIL_SCREAM;
     }
+
 
     @Nullable
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
         return ModSounds.HEROBRINE_OUCH;
+
     }
 
     //animation methods go here

@@ -1,0 +1,44 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "rolls": 2,
+      "bonus_rolls": 4,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "herobrinecomedymod:eliv_fumo_block",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "herobrinecomedymod:suspicious_substance",
+          "weight": 7,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 4,
+                "max": 6
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:redstone",
+          "weight": 12,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 7,
+                "max": 12
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
