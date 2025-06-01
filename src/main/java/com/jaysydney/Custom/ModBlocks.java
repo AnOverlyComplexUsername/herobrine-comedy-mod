@@ -67,6 +67,7 @@ public class ModBlocks {
 
     public static void initialize() {
         ItemGroupEvents.modifyEntriesEvent(ModItemGroups.MOD_ITEMS_GROUP_KEY).register((itemGroup) -> {
+
         itemGroup.add(ModBlocks.NETHER_REACTOR_CORE.asItem());
         itemGroup.add(ModBlocks.ELIV_FUMO_BLOCK.asItem());
     });}
