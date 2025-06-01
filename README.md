@@ -1,4 +1,4 @@
-# Fabric Example Mod
+# Herobrine Mod
 
 ##  Credits
 Arena model used: https://www.minecraft-schematics.com/schematic/19230/   
