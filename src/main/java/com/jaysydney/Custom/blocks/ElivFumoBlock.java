@@ -48,41 +48,6 @@ public class ElivFumoBlock extends HorizontalFacingBlock {
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit)
     {
         world.playSound(player,pos, ModSounds.EVIL_PLUSH, SoundCategory.BLOCKS, 1.0F, 1.0F);
-        MinecraftServer server = world.getServer();
-
-        if (server != null)
-        {
-            ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
-            ServerWorld herobrineWorld = server.getWorld(ModDimensions.HEROBRINE_WORLD);
-
-            if(herobrineWorld != null)
-            {
-                StructurePlacerAPI placer = new StructurePlacerAPI(herobrineWorld,
-                        Identifier.of(HerobrineComedyMod.MOD_ID,"herobrine_stadium"),
-                        new BlockPos(0,98,0), BlockMirror.NONE, BlockRotation.NONE,
-                        true,1.0f, new BlockPos(0,0,0));
-                TeleportTarget target =
-                        new TeleportTarget(herobrineWorld,
-                                new Vec3d(28f,100.5f,24.2f),
-                                new Vec3d(0,0,0),
-                                serverPlayer.getYaw(),serverPlayer.getPitch(),
-                                TeleportTarget.NO_OP);
-                TeleportTarget raidTarget =
-                        new TeleportTarget(herobrineWorld,
-                                new Vec3d(9f,109f,22f),
-                                new Vec3d(0,0,0),
-                                serverPlayer.getYaw(),serverPlayer.getPitch(),
-                                TeleportTarget.NO_OP);
-                placer.loadStructure();
-                serverPlayer.teleportTo(target);
-                HerobrineRaidEntity testEntity = new HerobrineRaidEntity(ModEntities.HEROBRINESARMY, serverPlayer.getWorld());
-                testEntity.setPlayerPos(serverPlayer.getPos());
-                testEntity.teleportTo(raidTarget);
-                testEntity.setAiDisabled(true);
-                herobrineWorld.spawnEntity(testEntity);
-
-            }
-        }
         return ActionResult.SUCCESS;
     }
 
