@@ -107,8 +107,8 @@ public class HerobrineRaidEntity extends PigEntity {
             raidMaxHealth += raidMob.getHealth();
             curRaidHealth += raidMob.getHealth();
         }
-        if (wave == 2) getEntityWorld().getPlayers().forEach(player -> {
-            player.sendMessage(Text.of("So you have trespassed on my domain"), true);
+        if (wave == 3) getEntityWorld().getPlayers().forEach(player -> {
+            player.sendMessage(Text.of("You have done well to get this far..."), true);
         });
         raidStart = true;
 
